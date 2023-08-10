@@ -1,0 +1,41 @@
+{% extends 'password_maker/base.html' %}
+{% block title %} アカウント一覧 {%endblock title %}
+{% block content %}
+{% load password_copy %}
+<h3>アカウント一覧</h3>
+<a type="button" class="btn btn-danger" href="{%url 'password_maker:create'%}">
+  新規追加
+</a>
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th></th>
+      <th>URL</th>
+      <th>メモ</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for account in account_list %}
+    <tr>
+      <td>{{ account.name }}</td>
+      <td><a href="{{ account.url }}">{{ account.url }}</a></td>
+      <td>{{ account.memo }}</td>
+      <td>
+        <div>
+          <a type="button" class="btn btn-danger" href="{%url 'password_maker:update' pk=account.pk%}">
+            編集
+          </a>
+          <button id="copy_button_{{ account.id }}" class="btn btn-warning"
+            onclick="passwordCopy('{{ account.decrypted_password }}')">
+            パスワードコピー
+          </button>
+        </div>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock content %}

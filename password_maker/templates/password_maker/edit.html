@@ -1,0 +1,11 @@
+{% extends 'password_maker/base.html' %}
+{% block title %} アカウント登録 {%endblock title %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form method='POST'>
+  {% csrf_token %}
+  {{ form | crispy }}
+  <a href="{{request.META.HTTP_REFERER}}" class="btn btn-secondary">キャンセル</a>
+  <button type="submit" class="btn btn-primary">保存</button>
+</form>
+{% endblock content %}
