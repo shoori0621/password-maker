@@ -39,4 +39,4 @@ def decrypt(encryptedData):
     aes = AES.new(key, AES.MODE_CBC, encryptedData.iv)
     plaintext = aes.decrypt(encryptedData.password)
 
-    return plaintext.decode(encoding='utf-8')
+    return plaintext.decode(encoding='utf-8').replace('\f', '')

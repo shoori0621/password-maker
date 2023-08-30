@@ -1,19 +1,16 @@
 {% extends 'password_maker/base.html' %}
 {% block title %} アカウント一覧 {%endblock title %}
 {% block content %}
-{% load password_copy %}
 <h3>アカウント一覧</h3>
 <a type="button" class="btn btn-danger" href="{%url 'password_maker:create'%}">
   新規追加
 </a>
-<table class="table table-striped table-bordered">
+<table class="table table-striped table-bordered mt-3">
   <thead>
     <tr>
       <th></th>
       <th>URL</th>
       <th>メモ</th>
-      <th></th>
-      <th></th>
       <th></th>
     </tr>
   </thead>
@@ -28,10 +25,14 @@
           <a type="button" class="btn btn-danger" href="{%url 'password_maker:update' pk=account.pk%}">
             編集
           </a>
-          <button id="copy_button_{{ account.id }}" class="btn btn-warning"
-            onclick="passwordCopy('{{ account.decrypted_password }}')">
+          <button id="copy_button_{{ account.id }}" class="btn btn-warning" onclick="passwordCopy('{{ account.id }}')">
             パスワードコピー
           </button>
+          <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+            data-bs-target="#deleteModal-{{account.id}}">
+            削除
+          </button>
+          {% include 'password_maker/delete.html' %}
         </div>
       </td>
     </tr>

@@ -1,4 +1,4 @@
-from django.views.generic import CreateView, ListView, UpdateView
+from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
 from .models import Account
@@ -8,6 +8,7 @@ import logging
 
 class AccountListView(ListView):
     model = Account
+    queryset = Account.objects.order_by('-priority').order_by('id');
     template_name = 'password_maker/index.html'
     context_object_name = 'account_list'
     success_url = '/'
@@ -31,4 +32,9 @@ class AccountUpdateView(UpdateView):
     model=Account
     form_class = AccountEditForm
     template_name = 'password_maker/edit.html'
+    success_url = reverse_lazy('password_maker:index')
+
+class AccountDeleteView(DeleteView):
+    model=Account
+    template_name = 'password_maker/delete.html'
     success_url = reverse_lazy('password_maker:index')

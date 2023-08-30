@@ -16,8 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from password_maker import apis
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("password_maker/", include("password_maker.urls")),
+    path('api/password_maker/', include(apis.router.urls)),
 ]

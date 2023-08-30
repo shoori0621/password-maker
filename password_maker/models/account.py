@@ -16,10 +16,6 @@ class Account(ModelBase):
   priority = models.SmallIntegerField(blank=True, null=True)
   memo = models.TextField(blank=True, null=True)
 
-  @property
-  def decrypted_password(self):
-    return decrypt(self)
-
   '''
   パスワード生成
   '''
